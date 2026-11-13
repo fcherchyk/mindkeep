@@ -21,8 +21,8 @@ attention active, on desktop first and on phones and tablets as an installed web
   session starts there.
 - **No clock and no losing:** a wrong answer shows the right one calmly ("Not quite. The things on
   the list are marked.") and the session goes on.
-- **Instructions written and spoken:** each game starts with one sentence, said aloud with the
-  same Piper voice as EduGames, a "Listen" button to hear it again and a "Show me" example.
+- **Instructions written and spoken:** each game starts with one sentence, said aloud with a
+  Piper voice, a "Listen" button to hear it again and a "Show me" example.
 - **Today's summary:** right answers and the level of each game, compared only with the user's
   own last session ("Up from level 3 last time", "Your first time: a good start").
 - **Accessibility:** contrast of at least 7:1, rem sizes, 64 px tap targets 16 px apart, a double

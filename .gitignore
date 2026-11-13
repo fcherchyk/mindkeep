@@ -16,6 +16,9 @@ __pycache__/
 playwright-report/
 test-results/
 
+# Local secrets
+.env
+
 # IDE and OS files
 .idea/
 .vscode/

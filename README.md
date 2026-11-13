@@ -8,8 +8,7 @@ condition. Cognitive training mostly improves the exercises practised; it is one
 among others (moving, sleeping well, seeing people).
 
 An installable web app (TypeScript, Svelte 5, Vite): it runs in the browser on desktop, tablet and
-phone, can be installed as an app, and works offline. A sibling of
-[EduGames](https://github.com/fcherchyk/edugames), with the same way of working.
+phone, can be installed as an app, and works offline.
 
 ## Features (slice 1)
 

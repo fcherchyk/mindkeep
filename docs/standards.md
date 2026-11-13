@@ -1,8 +1,7 @@
 # MindKeep standards
 
-The rules for MindKeep. They follow the hgames workspace standards (the ones EduGames uses) and
-change the architecture: MindKeep is an installable web app, not a desktop app, so it can reach
-phones and tablets. Anyone working on the repo (a person or an agent) reads this file first.
+The rules for MindKeep, an installable web app that runs on desktop, tablet and
+phone. Anyone working on the repo (a person or an agent) reads this file first.
 
 ## General
 
