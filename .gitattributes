@@ -1,0 +1,5 @@
+# Keep LF line endings on every system (Biome checks them, and Windows checks out CRLF by default).
+* text=auto eol=lf
+*.png binary
+*.wav binary
+*.woff2 binary
