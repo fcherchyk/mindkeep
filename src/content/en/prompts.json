@@ -1,0 +1,13 @@
+{
+  "prompts": [
+    {
+      "id": "shopping_intro",
+      "spoken": "Look at the shopping list. When you have it in mind, press Ready."
+    },
+    { "id": "shopping_pick", "spoken": "Pick the things that were on the list, then press Done." },
+    {
+      "id": "odd_intro",
+      "spoken": "All the shapes are the same but one. Pick the one that is different."
+    }
+  ]
+}

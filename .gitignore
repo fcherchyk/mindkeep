@@ -1,0 +1,25 @@
+# Dependencies and builds
+node_modules/
+dist/
+build/
+dev-dist/
+coverage/
+
+# Python (scripts/generate_audio.py)
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Sandbox scripts and Playwright (screenshots, reports)
+.sandbox/
+playwright-report/
+test-results/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+
+# Local Claude Code instructions (not versioned)
+CLAUDE.md

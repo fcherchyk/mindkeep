@@ -1,0 +1,11 @@
+{
+  "levels": [
+    { "items": 3, "choices": 6, "pauseMs": 1000, "similar": false },
+    { "items": 4, "choices": 8, "pauseMs": 1000, "similar": false },
+    { "items": 4, "choices": 8, "pauseMs": 3000, "similar": false },
+    { "items": 5, "choices": 10, "pauseMs": 3000, "similar": false },
+    { "items": 5, "choices": 10, "pauseMs": 3000, "similar": true },
+    { "items": 6, "choices": 12, "pauseMs": 5000, "similar": true },
+    { "items": 7, "choices": 12, "pauseMs": 5000, "similar": true }
+  ]
+}

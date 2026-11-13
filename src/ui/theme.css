@@ -1,0 +1,194 @@
+/* MindKeep's look: sober, calm and easy to read. Text and controls keep a contrast of at least
+   7:1 (WCAG AAA); sizes are in rem, so they grow with the browser's zoom and the text-size
+   setting. tests/theme.test.ts checks the colour pairs and the tap target size. */
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../assets/fonts/AtkinsonHyperlegible-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../assets/fonts/AtkinsonHyperlegible-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #3d3d3d;
+  --line: #5c5c5c;
+  --primary: #1f4e79;
+  --on-primary: #ffffff;
+  --right: #1d5e33;
+  --wrong: #8a2c0d;
+  --selected: #dce8f3;
+  --border: 2px;
+  --target: max(4rem, 64px); /* the smallest thing to tap */
+  --gap: max(1rem, 16px); /* the least space between two things to tap */
+  --radius: 0.75rem;
+  font-size: 112.5%;
+}
+
+:root[data-text-size="large"] {
+  font-size: 131.25%;
+}
+
+:root[data-text-size="larger"] {
+  font-size: 150%;
+}
+
+:root[data-contrast="high"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --text: #000000;
+  --muted: #000000;
+  --line: #000000;
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --right: #00491f;
+  --wrong: #6e1f00;
+  --border: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+h1:focus {
+  outline: none;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.card {
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  min-height: var(--target);
+  min-width: var(--target);
+  padding: 0.75rem 1.5rem;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  font-weight: 700;
+}
+
+button[aria-pressed="true"] {
+  background: var(--selected);
+  border-color: var(--primary);
+  border-width: calc(var(--border) + 2px);
+}
+
+button:disabled {
+  cursor: default;
+}
+
+:focus-visible {
+  outline: 4px solid var(--primary);
+  outline-offset: 3px;
+}
+
+input[type="text"] {
+  width: 100%;
+  min-height: var(--target);
+  padding: 0.75rem 1rem;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  margin-top: 1.5rem;
+}
+
+.message {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.message.right {
+  color: var(--right);
+}
+
+.message.wrong {
+  color: var(--wrong);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  margin-bottom: 1rem;
+}

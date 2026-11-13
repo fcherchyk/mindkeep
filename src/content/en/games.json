@@ -1,0 +1,4 @@
+{
+  "rounds": 3,
+  "games": [{ "id": "shopping", "area": "memory" }, { "id": "odd", "area": "attention" }]
+}

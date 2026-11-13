@@ -1,0 +1,24 @@
+{
+  "items": [
+    { "id": "apple", "word": "apple", "group": "fruit" },
+    { "id": "banana", "word": "banana", "group": "fruit" },
+    { "id": "pear", "word": "pear", "group": "fruit" },
+    { "id": "grapes", "word": "grapes", "group": "fruit" },
+    { "id": "lemon", "word": "lemon", "group": "fruit" },
+    { "id": "carrot", "word": "carrot", "group": "vegetable" },
+    { "id": "tomato", "word": "tomato", "group": "vegetable" },
+    { "id": "onion", "word": "onion", "group": "vegetable" },
+    { "id": "bread", "word": "bread", "group": "bakery" },
+    { "id": "milk", "word": "milk", "group": "dairy" },
+    { "id": "cheese", "word": "cheese", "group": "dairy" },
+    { "id": "butter", "word": "butter", "group": "dairy" },
+    { "id": "egg", "word": "eggs", "group": "dairy" },
+    { "id": "fish", "word": "fish", "group": "fresh" },
+    { "id": "rice", "word": "rice", "group": "pantry" },
+    { "id": "coffee", "word": "coffee", "group": "pantry" },
+    { "id": "tea", "word": "tea", "group": "pantry" },
+    { "id": "honey", "word": "honey", "group": "pantry" },
+    { "id": "soap", "word": "soap", "group": "household" },
+    { "id": "candle", "word": "candle", "group": "household" }
+  ]
+}
