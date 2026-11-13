@@ -2,7 +2,7 @@
  * tests that exist, every asset is credited, every string is used, and the app installs. */
 
 import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, posix } from "node:path";
 import { manifest } from "../manifest";
 import { clipUrl } from "../src/ui/audio";
 import { content } from "../src/ui/content";
@@ -11,7 +11,7 @@ const ROOT = join(import.meta.dirname, "..");
 
 function files(dir: string, pattern: RegExp): string[] {
   return readdirSync(join(ROOT, dir)).flatMap((name) => {
-    const path = join(dir, name);
+    const path = posix.join(dir, name); // always "/", so the checks match on Windows too
     if (statSync(join(ROOT, path)).isDirectory()) return files(path, pattern);
     return pattern.test(name) ? [path] : [];
   });
@@ -88,7 +88,7 @@ test("test_S1_AC14_every_asset_is_credited_with_an_allowed_licence", () => {
   const credits = read("CREDITS.md");
   const sections = credits.split(/^## /m).slice(1);
   const assets = [...files("src/assets", /./), ...files("public", /./)].map((p) =>
-    relative("src/assets", p).startsWith("..") ? p : relative("src/assets", p),
+    posix.relative("src/assets", p).startsWith("..") ? p : posix.relative("src/assets", p),
   );
   for (const asset of assets) {
     const section = sections.find((s) =>
