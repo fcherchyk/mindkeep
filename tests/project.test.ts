@@ -61,7 +61,7 @@ function documented(): Map<string, Set<string>> {
 
 test("test_S1_AC14_every_slice_has_a_doc_with_its_acceptance_criteria", () => {
   expect(files("docs", /^S\d+_.*\.md$/)).toEqual(["docs/S1_mvp.md"]);
-  expect([...documented().keys()]).toEqual(Array.from({ length: 16 }, (_, i) => `S1_AC${i + 1}`));
+  expect([...documented().keys()]).toEqual(Array.from({ length: 17 }, (_, i) => `S1_AC${i + 1}`));
 });
 
 test("test_S1_AC14_every_criterion_has_tests_and_the_doc_lists_exactly_those_that_exist", () => {

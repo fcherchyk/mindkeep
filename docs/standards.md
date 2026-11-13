@@ -69,3 +69,11 @@ to its word in `items.json`. Figures and drawings carry no text, so they are sha
   docs list exactly the tests that exist.
 - Every asset is in `CREDITS.md` with an allowed licence (OFL, MIT, CC0, public domain).
 - Coverage of at least 80%. The sandbox scripts run the checks and the screenshot demo.
+- The root `.sh` scripts are helpers for Linux and macOS sandboxes (no screen, maybe no network):
+  `test-sandbox.sh` runs the checks, `run-sandbox.sh` plays a session and saves screenshots (with
+  Chrome, or Playwright's Chromium when there is no Chrome), and `sandbox-deps.sh` installs the
+  dependencies offline first, with a fallback when the lockfile's versions are not available.
+  They are versioned as executable.
+- Dependencies: the ranges in `package.json` start at the first release of each major, and the
+  lockfile pins releases at least 30 days old (`pnpm install --config.minimum-release-age=43200`
+  when updating it), so a registry with a release-age rule still accepts them.

@@ -14,24 +14,24 @@
     "demo": "playwright test"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.6.7",
-    "@playwright/test": "^1.65.0",
-    "@sveltejs/vite-plugin-svelte": "^7.3.1",
-    "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/svelte": "^5.4.2",
-    "@types/node": "^26.6.6",
-    "@vitest/coverage-v8": "^5.1.0",
-    "jsdom": "^31.0.1",
-    "svelte": "^5.57.3",
-    "svelte-check": "^4.7.8",
-    "typescript": "^6.0.3",
-    "vite": "^8.3.8",
+    "@biomejs/biome": "^2.0.0",
+    "@playwright/test": "^1.50.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/svelte": "^5.2.0",
+    "@types/node": "^26.0.0",
+    "@vitest/coverage-v8": "^5.0.0",
+    "jsdom": "^30.0.0",
+    "svelte": "^5.40.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.0",
     "vite-plugin-pwa": "^2.0.0",
-    "vitest": "^5.1.0",
-    "workbox-window": "^7.4.1"
+    "vitest": "^5.0.0",
+    "workbox-window": "^7.0.0"
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {
-    "node": ">=24"
+    "node": "^22.22.2 || >=24.15.0"
   }
 }

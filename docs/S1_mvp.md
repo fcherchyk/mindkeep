@@ -207,3 +207,18 @@ worker caches the scripts, styles, page, font, clips and icons.
 
 - `tests/project.test.ts::test_S1_AC16_the_manifest_makes_it_installable_with_icons_of_192_and_512`
 - `tests/project.test.ts::test_S1_AC16_the_service_worker_caches_everything_the_app_needs_offline`
+
+### S1_AC17: Dependencies install where the lockfile's versions are out of reach
+
+`./test-sandbox.sh` and `./run-sandbox.sh` install the dependencies through `sandbox-deps.sh`:
+the lockfile offline, then with network, then (when the registry refuses those versions) the
+ranges of `package.json` skipping releases newer than 14, 30, 60 or 90 days, never changing
+`pnpm-lock.yaml`. A failed attempt leaves no half install, `SANDBOX_DEPS=locked` and
+`SANDBOX_OFFLINE=1` turn off the fallback and the network, and a Node older than the dependencies
+accept stops with a clear message.
+
+- `tests/sandbox.test.ts::test_S1_AC17_the_sandbox_scripts_are_executable_bash`
+- `tests/sandbox.test.ts::test_S1_AC17_the_lockfile_is_tried_offline_first_then_with_network`
+- `tests/sandbox.test.ts::test_S1_AC17_refused_versions_fall_back_to_older_releases_without_touching_the_lockfile`
+- `tests/sandbox.test.ts::test_S1_AC17_the_settings_forbid_the_fallback_or_the_network`
+- `tests/sandbox.test.ts::test_S1_AC17_an_old_node_stops_with_a_clear_message`
