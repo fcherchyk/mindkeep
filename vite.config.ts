@@ -20,6 +20,8 @@ export default defineConfig({
     environment: "jsdom",
     include: ["tests/**/*.test.ts"],
     setupFiles: ["tests/setup.ts"],
+    // Tests that play a whole session take 6 to 8 s on a slow 4-core machine.
+    testTimeout: 20_000,
     // The module cache keeps old `import.meta.glob` results, so new clips would go unseen.
     fsModuleCache: false,
     coverage: {

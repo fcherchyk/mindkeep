@@ -6,7 +6,8 @@ export default defineConfig({
   testDir: "tests/e2e",
   outputDir: ".sandbox/test-results",
   reporter: "list",
-  timeout: 180_000, // a demo plays whole sessions, a picture at two sizes per screen
+  timeout: 360_000, // a demo plays whole sessions, a picture at two sizes per screen (3 min
+  // on a slow machine)
   use: {
     baseURL: "http://localhost:4173",
     channel: process.env.PW_CHROMIUM ? undefined : "chrome",

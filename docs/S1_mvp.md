@@ -215,12 +215,20 @@ the lockfile offline, then with network, then (when the registry refuses those v
 ranges of `package.json` skipping releases newer than 14, 30, 60 or 90 days, never changing
 `pnpm-lock.yaml`. A failed attempt leaves no half install, `SANDBOX_DEPS=locked` and
 `SANDBOX_OFFLINE=1` turn off the fallback and the network, and a Node older than the dependencies
-accept stops with a clear message.
+accept stops with a clear message. A `node_modules` already there is set aside and never lost: an
+install replaces it, and if none works or the run is interrupted, it is put back (with a
+warning). The attempts stop after `SANDBOX_DEPS_TIMEOUT` seconds (600 by default), a registry
+that does not answer fails fast, and a long attempt says every 30 seconds that it is still
+installing.
 
 - `tests/sandbox.test.ts::test_S1_AC17_the_sandbox_scripts_are_executable_bash`
 - `tests/sandbox.test.ts::test_S1_AC17_the_lockfile_is_tried_offline_first_then_with_network`
 - `tests/sandbox.test.ts::test_S1_AC17_refused_versions_fall_back_to_older_releases_without_touching_the_lockfile`
 - `tests/sandbox.test.ts::test_S1_AC17_the_settings_forbid_the_fallback_or_the_network`
+- `tests/sandbox.test.ts::test_S1_AC17_an_existing_node_modules_is_replaced_when_an_install_works`
+- `tests/sandbox.test.ts::test_S1_AC17_an_existing_node_modules_is_kept_when_no_install_works`
+- `tests/sandbox.test.ts::test_S1_AC17_a_hung_install_stops_at_the_time_limit_and_shows_progress`
+- `tests/sandbox.test.ts::test_S1_AC17_an_interrupted_install_puts_the_old_node_modules_back`
 - `tests/sandbox.test.ts::test_S1_AC17_an_old_node_stops_with_a_clear_message`
 
 ### S1_AC18: The volume
