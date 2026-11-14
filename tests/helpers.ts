@@ -1,7 +1,7 @@
 /** Shared test helpers: an in-memory store, a voice that only records, and the app around them. */
 
 import { render } from "@testing-library/svelte";
-import { newProfile, type Profile } from "../src/core/profile";
+import { newProfile, type Profile, VOLUME_MAX, volumeGain } from "../src/core/profile";
 import { seeded } from "../src/core/random";
 import { type KeyValue, saveProfile } from "../src/core/storage";
 import App from "../src/ui/App.svelte";
@@ -24,9 +24,11 @@ export class MemoryStore implements KeyValue {
 
 export class FakePlayer implements Player {
   played: string[] = [];
+  volumes: number[] = []; // the volume of each clip played
   stops = 0;
-  play(url: string) {
+  play(url: string, volume: number) {
     this.played.push(url);
+    this.volumes.push(volume);
   }
   stop() {
     this.stops += 1;
@@ -51,7 +53,12 @@ export function makeApp(setup: Setup = {}) {
     rng: seeded(setup.seed ?? 7),
     now: () => setup.now ?? new Date(2026, 10, 15, 10), // Shopping, Odd One Out and Trail
     voice: (state) =>
-      new Voice(content.locale, player, () => state.profile?.settings.voice ?? true),
+      new Voice(
+        content.locale,
+        player,
+        () => state.profile?.settings.voice ?? true,
+        () => volumeGain(state.profile?.settings.volume ?? VOLUME_MAX),
+      ),
   });
   return { app, store, player };
 }

@@ -28,7 +28,9 @@ phone, can be installed as an app, and works offline.
   letter) in the order you would do them, leaving out a step that does not belong.
 - **Adaptive difficulty:** each game moves up after three right answers in a row and down after a
   wrong one, so it stays challenging without being discouraging. Tomorrow starts where today ended.
-- **Instructions written and spoken**, with "Listen" and "Show me".
+- **Instructions written and spoken**, with "Listen" and "Show me". The volume goes up and down in
+  five steps in Settings, heard at once, and a "Sound on / Sound off" button above every screen
+  mutes the voice with one tap.
 - **Today's summary**, compared only with your own last session.
 - **Accessible:** contrast of at least 7:1, three text sizes, high contrast, big buttons, a double
   tap counted once, keyboard and screen reader friendly.

@@ -10,10 +10,13 @@ export const VERSION = 1;
 export const TEXT_SIZES = ["normal", "large", "larger"] as const;
 export type TextSize = (typeof TEXT_SIZES)[number];
 export const NAME_MAX = 20;
+export const VOLUME_MIN = 1;
+export const VOLUME_MAX = 5;
 
 export interface Settings {
   textSize: TextSize;
-  voice: boolean;
+  voice: boolean; // false: muted
+  volume: number; // VOLUME_MIN to VOLUME_MAX
   contrast: boolean; // high contrast
 }
 
@@ -36,7 +39,22 @@ export interface Profile {
   history: DayRecord[];
 }
 
-export const DEFAULT_SETTINGS: Settings = { textSize: "normal", voice: true, contrast: false };
+export const DEFAULT_SETTINGS: Settings = {
+  textSize: "normal",
+  voice: true,
+  volume: VOLUME_MAX,
+  contrast: false,
+};
+
+/** A volume level, kept from VOLUME_MIN to VOLUME_MAX. */
+export function clampVolume(level: number): number {
+  return Math.min(VOLUME_MAX, Math.max(VOLUME_MIN, Math.round(level)));
+}
+
+/** The audio element's volume (0 to 1) for a volume level: the loudest is the clip as recorded. */
+export function volumeGain(level: number): number {
+  return clampVolume(level) / VOLUME_MAX;
+}
 
 const NAME = /^[\p{L}][\p{L}\p{M} '’-]*$/u;
 

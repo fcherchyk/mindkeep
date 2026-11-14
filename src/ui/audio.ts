@@ -13,7 +13,7 @@ export function clipUrl(locale: string, id: string): string | undefined {
 }
 
 export interface Player {
-  play(url: string): void;
+  play(url: string, volume: number): void; // volume from 0 to 1
   stop(): void;
 }
 
@@ -21,9 +21,10 @@ export interface Player {
 export function browserPlayer(): Player {
   let current: HTMLAudioElement | null = null;
   return {
-    play(url) {
+    play(url, volume) {
       current?.pause();
       current = new Audio(url);
+      current.volume = volume;
       current.play().catch(() => {
         // autoplay blocked or no sound device: the text is on screen anyway
       });
@@ -40,13 +41,14 @@ export class Voice {
     private locale: string,
     private player: Player,
     private enabled: () => boolean,
+    private volume: () => number, // from 0 to 1
   ) {}
 
   /** Say a prompt; false when nothing is said (voice off, or no clip). */
   say(id: string): boolean {
     const url = clipUrl(this.locale, id);
     if (!this.enabled() || url === undefined) return false;
-    this.player.play(url);
+    this.player.play(url, this.volume());
     return true;
   }
 

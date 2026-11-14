@@ -1,5 +1,6 @@
 <script lang="ts">
-// Shows the screen of the moment and applies the display settings to the whole page.
+// Shows the screen of the moment and applies the display settings to the whole page. Above every
+// screen (once there is a profile), a button turns the sound off or on with one tap.
 
 import Home from "./screens/Home.svelte";
 import Intro from "./screens/Intro.svelte";
@@ -25,6 +26,15 @@ $effect(() => {
 </script>
 
 <main>
+  {#if app.profile}
+    {@const on = app.profile.settings.voice}
+    <div class="sound-bar">
+      <button class="mute" onclick={() => app.toggleMute()}>
+        <span aria-hidden="true">{on ? "🔊" : "🔇"}</span>
+        {on ? app.t("sound_on") : app.t("sound_off")}
+      </button>
+    </div>
+  {/if}
   {#if app.screen === "welcome"}
     <Welcome {app} />
   {:else if app.screen === "home"}
@@ -53,3 +63,18 @@ $effect(() => {
     <Summary {app} />
   {/if}
 </main>
+
+<style>
+  .sound-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+  }
+
+  .mute {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+</style>

@@ -1,6 +1,8 @@
-/** S1_AC1 (the profile) and S1_AC9 (today compared with the user's own past). */
+/** S1_AC1 (the profile), S1_AC9 (today compared with the user's own past) and S1_AC18 (the
+ * volume's steps). */
 
 import {
+  clampVolume,
   cleanName,
   DEFAULT_SETTINGS,
   doneToday,
@@ -8,6 +10,9 @@ import {
   newProfile,
   summary,
   today,
+  VOLUME_MAX,
+  VOLUME_MIN,
+  volumeGain,
 } from "../src/core/profile";
 import { newSession, record } from "../src/core/session";
 import { content } from "../src/ui/content";
@@ -18,6 +23,12 @@ test("test_S1_AC1_a_first_name_makes_a_profile_with_the_default_settings", () =>
   expect(profile.settings).toEqual(DEFAULT_SETTINGS);
   expect(profile.levels).toEqual({});
   for (const name of ["Ann-Marie", "O'Neil", "Zoë"]) expect(cleanName(name)).toBe(name);
+});
+
+test("test_S1_AC18_the_volume_starts_at_the_loudest_and_has_five_steps", () => {
+  expect(newProfile("Rosa").settings.volume).toBe(VOLUME_MAX);
+  expect([1, 2, 3, 4, 5].map(volumeGain)).toEqual([0.2, 0.4, 0.6, 0.8, 1]);
+  expect([0, 6, 2.4].map(clampVolume)).toEqual([VOLUME_MIN, VOLUME_MAX, 2]);
 });
 
 test("test_S1_AC1_anything_but_a_first_name_is_refused", () => {

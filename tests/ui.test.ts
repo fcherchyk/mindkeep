@@ -1,8 +1,10 @@
-/** The screens: the first visit, the home, both games, instructions, settings and the summary. */
+/** The screens: the first visit, the home, both games, instructions, settings (with the volume and
+ * the quick mute) and the summary. */
 
 import { fireEvent, screen, within } from "@testing-library/svelte";
 import { tick } from "svelte";
 import { newProfile } from "../src/core/profile";
+import { KEY } from "../src/core/storage";
 import { content } from "../src/ui/content";
 import { renderApp } from "./helpers";
 import { click, playOdd, playRound, playShopping } from "./play";
@@ -204,7 +206,101 @@ test("test_S1_AC11_settings_change_the_text_size_contrast_and_voice_and_are_save
   ).getAllByRole("button");
   await fireEvent.click(voiceOff as HTMLElement);
   expect(player.stops).toBeGreaterThan(0);
-  expect(app.profile?.settings).toEqual({ textSize: "larger", voice: false, contrast: true });
+  expect(app.profile?.settings).toEqual({
+    textSize: "larger",
+    voice: false,
+    volume: 5,
+    contrast: true,
+  });
   await click("Back");
   expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Hello, Rosa");
+});
+
+// S1_AC18: the volume, in Settings
+
+test("test_S1_AC18_quieter_and_louder_change_the_volume_are_heard_at_once_and_saved", async () => {
+  const { app, player, store } = renderApp();
+  await click("Settings");
+  const quieter = screen.getByRole("button", { name: "Quieter" });
+  const louder = screen.getByRole("button", { name: "Louder" });
+  expect(screen.getByRole("status")).toHaveTextContent("5 of 5");
+  expect(louder).toBeDisabled();
+
+  await fireEvent.click(quieter);
+  await fireEvent.click(quieter);
+  expect(screen.getByRole("status")).toHaveTextContent("3 of 5");
+  expect(player.played).toHaveLength(2);
+  expect(player.played.every((url) => url.includes("volume_sample"))).toBe(true);
+  expect(player.volumes).toEqual([0.8, 0.6]);
+  await fireEvent.click(louder);
+  expect(player.volumes.at(-1)).toBe(0.8);
+
+  for (let i = 0; i < 5; i++) await fireEvent.click(quieter);
+  expect(app.profile?.settings.volume).toBe(1);
+  expect(quieter).toBeDisabled();
+  expect(store.getItem(KEY)).toContain('"volume":1');
+
+  await click("Back");
+  await click("Start");
+  await click(/Listen/);
+  expect(player.volumes.at(-1)).toBe(0.2);
+});
+
+test("test_S1_AC18_changing_the_volume_turns_the_sound_back_on", async () => {
+  const profile = newProfile("Rosa");
+  profile.settings.voice = false;
+  const { app, player } = renderApp({ profile });
+  await click("Settings");
+  await click("Quieter");
+  expect(app.profile?.settings).toMatchObject({ voice: true, volume: 4 });
+  expect(player.volumes).toEqual([0.8]);
+});
+
+// S1_AC19: the quick mute, on every screen
+
+test("test_S1_AC19_the_mute_button_is_on_every_screen_once_there_is_a_profile", async () => {
+  renderApp({ profile: null });
+  expect(screen.queryByRole("button", { name: /Sound/ })).toBeNull();
+  await fireEvent.input(screen.getByLabelText("Your first name"), { target: { value: "Rosa" } });
+  await click("Continue");
+  const mute = () => screen.getByRole("button", { name: "Sound on" });
+  expect(mute()).toBeInTheDocument(); // home
+  await click("Settings");
+  expect(mute()).toBeInTheDocument();
+  await click("Back");
+  await click("Start");
+  expect(mute()).toBeInTheDocument(); // the instructions
+  await click("Start");
+  expect(screen.getByTestId("list")).toBeInTheDocument(); // a game
+  expect(mute()).toBeInTheDocument();
+});
+
+test("test_S1_AC19_one_tap_mutes_and_stops_the_voice_another_turns_it_back_on", async () => {
+  const { app, player } = renderApp();
+  await click("Start");
+  expect(player.played).toHaveLength(1); // the instructions are said
+  const stops = player.stops;
+  await click("Sound on");
+  expect(player.stops).toBeGreaterThan(stops);
+  expect(app.profile?.settings.voice).toBe(false);
+  await click(/Listen/);
+  expect(player.played).toHaveLength(1); // muted: nothing more is said
+
+  await click("Sound off");
+  expect(player.played).toHaveLength(1); // turning the sound on says nothing by itself
+  await click(/Listen/);
+  expect(player.played).toHaveLength(2);
+  expect(app.profile?.settings.voice).toBe(true);
+});
+
+test("test_S1_AC19_settings_show_the_same_sound_as_the_mute_button", async () => {
+  renderApp();
+  await click("Settings");
+  await click("Sound on");
+  const [on, off] = within(
+    screen.getByRole("heading", { name: "Spoken instructions" }).parentElement as HTMLElement,
+  ).getAllByRole("button");
+  expect(off).toHaveAttribute("aria-pressed", "true");
+  await fireEvent.click(on as HTMLElement);
+  expect(screen.getByRole("button", { name: "Sound on" })).toBeInTheDocument();
 });

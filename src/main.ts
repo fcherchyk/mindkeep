@@ -1,5 +1,6 @@
 import { registerSW } from "virtual:pwa-register";
 import { mount } from "svelte";
+import { VOLUME_MAX, volumeGain } from "./core/profile";
 import { seeded } from "./core/random";
 import App from "./ui/App.svelte";
 import { browserPlayer, Voice } from "./ui/audio";
@@ -12,7 +13,12 @@ const app = new AppState({
   store: window.localStorage,
   rng: seeded(Date.now()),
   voice: (state) =>
-    new Voice(content.locale, browserPlayer(), () => state.profile?.settings.voice ?? true),
+    new Voice(
+      content.locale,
+      browserPlayer(),
+      () => state.profile?.settings.voice ?? true,
+      () => volumeGain(state.profile?.settings.volume ?? VOLUME_MAX),
+    ),
 });
 
 mount(App, { target: document.getElementById("app") as HTMLElement, props: { app } });

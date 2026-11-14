@@ -31,6 +31,10 @@
     {
       "id": "steps_intro",
       "spoken": "Tap the steps in the order you would do them. If a step does not belong, leave it out."
+    },
+    {
+      "id": "volume_sample",
+      "spoken": "This is how loud I will speak."
     }
   ]
 }

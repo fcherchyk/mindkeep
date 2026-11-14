@@ -2,7 +2,14 @@
  * or unknown data is set aside under another key, never a crash: the user starts again. */
 
 import { GAME_IDS } from "./content";
-import { DEFAULT_SETTINGS, type Profile, TEXT_SIZES, VERSION } from "./profile";
+import {
+  DEFAULT_SETTINGS,
+  type Profile,
+  TEXT_SIZES,
+  VERSION,
+  VOLUME_MAX,
+  VOLUME_MIN,
+} from "./profile";
 
 export interface KeyValue {
   getItem(key: string): string | null;
@@ -30,6 +37,10 @@ function isProfile(data: unknown): data is Profile {
 function withSettings(profile: Profile): Profile {
   const settings = { ...DEFAULT_SETTINGS, ...(profile.settings ?? {}) };
   if (!TEXT_SIZES.includes(settings.textSize)) settings.textSize = DEFAULT_SETTINGS.textSize;
+  const volume = settings.volume;
+  if (!Number.isInteger(volume) || volume < VOLUME_MIN || volume > VOLUME_MAX) {
+    settings.volume = DEFAULT_SETTINGS.volume;
+  }
   return { ...profile, settings };
 }
 

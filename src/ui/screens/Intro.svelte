@@ -1,5 +1,6 @@
 <script lang="ts">
 // Before a game's first round: what to do, written and spoken, and an example on request.
+import { untrack } from "svelte";
 import type { Figure as FigureData } from "../../core/odd";
 import Figure from "../components/Figure.svelte";
 import ItemTile from "../components/ItemTile.svelte";
@@ -17,8 +18,11 @@ const listed = $derived(new Set(sample.slice(0, 2).map((item) => item.id)));
 const plain: FigureData = { shape: "circle", scale: 1, turn: 0, mark: false };
 const figures: FigureData[] = [plain, plain, { ...plain, shape: "square" }, plain];
 
+// Said once per game's instructions: untracked, so turning the sound or the volume back on does
+// not say them again.
 $effect(() => {
-  app.voice.say(promptId);
+  const id = promptId;
+  untrack(() => app.voice.say(id));
 });
 </script>
 

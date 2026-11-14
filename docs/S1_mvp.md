@@ -222,3 +222,27 @@ accept stops with a clear message.
 - `tests/sandbox.test.ts::test_S1_AC17_refused_versions_fall_back_to_older_releases_without_touching_the_lockfile`
 - `tests/sandbox.test.ts::test_S1_AC17_the_settings_forbid_the_fallback_or_the_network`
 - `tests/sandbox.test.ts::test_S1_AC17_an_old_node_stops_with_a_clear_message`
+
+### S1_AC18: The volume
+
+Added after S3. Settings has a Sound card: the spoken instructions on and off, and the volume
+from 1 to 5 with big "Quieter" and "Louder" buttons and the level shown ("3 of 5"); 5, the clip
+as recorded, is the default. Each step says a short phrase at the new volume, turns the sound
+back on if it was off, and is saved. The buttons stop at 1 and 5. A volume missing or out of range
+in saved data gets the default.
+
+- `tests/profile.test.ts::test_S1_AC18_the_volume_starts_at_the_loudest_and_has_five_steps`
+- `tests/storage.test.ts::test_S1_AC18_a_volume_missing_or_out_of_range_in_saved_data_gets_the_default`
+- `tests/ui.test.ts::test_S1_AC18_quieter_and_louder_change_the_volume_are_heard_at_once_and_saved`
+- `tests/ui.test.ts::test_S1_AC18_changing_the_volume_turns_the_sound_back_on`
+
+### S1_AC19: The quick mute
+
+Added after S3. Once there is a profile, every screen (the home, settings, the instructions, the
+games, the summary) has a "Sound on" / "Sound off" button above it, with a speaker icon. One tap
+mutes: the voice stops at once and nothing more is said; another tap turns it back on, saying
+nothing by itself. It is the same setting as the spoken instructions in Settings.
+
+- `tests/ui.test.ts::test_S1_AC19_the_mute_button_is_on_every_screen_once_there_is_a_profile`
+- `tests/ui.test.ts::test_S1_AC19_one_tap_mutes_and_stops_the_voice_another_turns_it_back_on`
+- `tests/ui.test.ts::test_S1_AC19_settings_show_the_same_sound_as_the_mute_button`

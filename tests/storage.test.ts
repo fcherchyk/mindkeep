@@ -29,8 +29,20 @@ test("test_S1_AC2_settings_missing_or_wrong_in_saved_data_get_the_default", () =
   expect(loadProfile(store)?.settings).toEqual({
     textSize: "normal",
     voice: false,
+    volume: 5,
     contrast: false,
   });
+});
+
+test("test_S1_AC18_a_volume_missing_or_out_of_range_in_saved_data_gets_the_default", () => {
+  const store = new MemoryStore();
+  const profile = newProfile("Rosa");
+  for (const volume of [undefined, 0, 6, 2.5, "3", null]) {
+    store.setItem(KEY, JSON.stringify({ ...profile, settings: { ...profile.settings, volume } }));
+    expect(loadProfile(store)?.settings.volume, String(volume)).toBe(5);
+  }
+  store.setItem(KEY, JSON.stringify({ ...profile, settings: { ...profile.settings, volume: 2 } }));
+  expect(loadProfile(store)?.settings.volume).toBe(2);
 });
 
 // S2_AC7: a profile saved before S2 keeps working
@@ -46,7 +58,7 @@ test("test_S2_AC7_a_profile_from_slice_1_loads_and_the_new_games_start_at_level_
   };
   store.setItem(KEY, JSON.stringify(s1));
   const profile = loadProfile(store);
-  expect(profile).toEqual(s1);
+  expect(profile).toEqual({ ...s1, settings: { ...s1.settings, volume: 5 } });
   if (!profile) return;
   expect(levelOf(profile, "pairs")).toEqual({ level: 1, streak: 0 });
   expect(levelOf(profile, "sequences")).toEqual({ level: 1, streak: 0 });

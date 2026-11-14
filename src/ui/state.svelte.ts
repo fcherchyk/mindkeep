@@ -4,6 +4,7 @@
 import { type Content, type GameId, say } from "../core/content";
 import {
   afterRound,
+  clampVolume,
   finishSession,
   levelOf,
   newProfile,
@@ -101,6 +102,19 @@ export class AppState {
     if (!this.profile) return;
     this.save({ ...this.profile, settings: { ...this.profile.settings, ...changes } });
     if (changes.voice === false) this.voice.stop();
+  }
+
+  /** One step quieter (-1) or louder (+1), heard at once in a short phrase. Someone looking for
+   * the volume wants to hear it, so this also turns the sound back on. */
+  changeVolume(delta: number): void {
+    if (!this.profile) return;
+    this.updateSettings({ volume: clampVolume(this.profile.settings.volume + delta), voice: true });
+    this.voice.say("volume_sample");
+  }
+
+  /** The quick mute on every screen: muting stops the voice at once. */
+  toggleMute(): void {
+    if (this.profile) this.updateSettings({ voice: !this.profile.settings.voice });
   }
 
   go(screen: Screen): void {
