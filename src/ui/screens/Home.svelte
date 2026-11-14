@@ -16,10 +16,10 @@ const done = $derived(app.profile ? doneToday(app.profile, app.date) : false);
   <h2 id="session-title">{app.t("session_title")}</h2>
   <p>{app.t("session_text")}</p>
   <ul class="games">
-    {#each app.content.games as game (game.id)}
+    {#each app.todayGames as id (id)}
       <li>
-        <strong>{app.t(`game_${game.id}`)}</strong>
-        <span class="muted">· {app.t(`area_${game.area}`)}</span>
+        <strong>{app.t(`game_${id}`)}</strong>
+        <span class="muted">· {app.t(`area_${app.content.games.find((game) => game.id === id)?.area}`)}</span>
       </li>
     {/each}
   </ul>

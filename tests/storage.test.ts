@@ -1,6 +1,6 @@
 /** S1_AC2: the profile is saved on the device; damaged data is set aside, never a crash. */
 
-import { newProfile } from "../src/core/profile";
+import { levelOf, newProfile } from "../src/core/profile";
 import { CORRUPT_KEY, KEY, loadProfile, saveProfile } from "../src/core/storage";
 import { MemoryStore } from "./helpers";
 
@@ -31,4 +31,24 @@ test("test_S1_AC2_settings_missing_or_wrong_in_saved_data_get_the_default", () =
     voice: false,
     contrast: false,
   });
+});
+
+// S2_AC7: a profile saved before S2 keeps working
+
+test("test_S2_AC7_a_profile_from_slice_1_loads_and_the_new_games_start_at_level_1", () => {
+  const store = new MemoryStore();
+  const s1 = {
+    version: 1,
+    name: "Rosa",
+    settings: { textSize: "large", voice: true, contrast: false },
+    levels: { shopping: { level: 3, streak: 1 }, odd: { level: 4, streak: 0 } },
+    history: [{ date: "2026-11-12", games: { shopping: { rounds: 3, right: 2, level: 3 } } }],
+  };
+  store.setItem(KEY, JSON.stringify(s1));
+  const profile = loadProfile(store);
+  expect(profile).toEqual(s1);
+  if (!profile) return;
+  expect(levelOf(profile, "pairs")).toEqual({ level: 1, streak: 0 });
+  expect(levelOf(profile, "sequences")).toEqual({ level: 1, streak: 0 });
+  expect(levelOf(profile, "shopping").level).toBe(3);
 });

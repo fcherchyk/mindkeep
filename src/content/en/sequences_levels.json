@@ -1,0 +1,11 @@
+{
+  "levels": [
+    { "size": 3, "length": 2, "stepMs": 1000 },
+    { "size": 3, "length": 3, "stepMs": 1000 },
+    { "size": 3, "length": 4, "stepMs": 1000 },
+    { "size": 3, "length": 4, "stepMs": 800 },
+    { "size": 3, "length": 5, "stepMs": 800 },
+    { "size": 4, "length": 5, "stepMs": 800 },
+    { "size": 4, "length": 6, "stepMs": 800 }
+  ]
+}

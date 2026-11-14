@@ -1,4 +1,12 @@
 {
   "rounds": 3,
-  "games": [{ "id": "shopping", "area": "memory" }, { "id": "odd", "area": "attention" }]
+  "perSession": 3,
+  "games": [
+    { "id": "shopping", "area": "memory" },
+    { "id": "odd", "area": "attention" },
+    { "id": "pairs", "area": "memory" },
+    { "id": "sequences", "area": "memory" },
+    { "id": "trail", "area": "planning" },
+    { "id": "steps", "area": "planning" }
+  ]
 }

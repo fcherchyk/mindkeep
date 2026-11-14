@@ -46,6 +46,37 @@ $effect(() => {
           </li>
         {/each}
       </ul>
+    {:else if game === "pairs"}
+      <ul class="tiles cards">
+        {#each [sample[0], sample[1], sample[0], sample[2]] as item, i (i)}
+          <li class:marked={i === 0 || i === 2}>
+            {#if item && (i === 0 || i === 2)}
+              <ItemTile id={item.id} word={item.word} note="✓" tone="right" />
+            {:else}
+              <span class="back"></span>
+            {/if}
+          </li>
+        {/each}
+      </ul>
+    {:else if game === "sequences"}
+      <ul class="tiles squares">
+        {#each Array.from({ length: 9 }, (_, i) => i) as tile (tile)}
+          {@const n = [4, 0, 8].indexOf(tile)}
+          <li class:marked={n >= 0}>{#if n >= 0}<span class="number">{n + 1}</span>{/if}</li>
+        {/each}
+      </ul>
+    {:else if game === "trail"}
+      <svg class="trail" viewBox="0 0 300 120" role="img" aria-label="1, A, 2">
+        <polyline points="40,80 150,35 260,80" />
+        {#each [["1", 40, 80], ["A", 150, 35], ["2", 260, 80]] as [label, x, y] (label)}
+          <circle cx={x} cy={y} r="26" />
+          <text x={x} y={Number(y) + 9}>{label}</text>
+        {/each}
+      </svg>
+    {:else if game === "steps"}
+      <ol class="steps">
+        {#each app.content.tasks[0]?.steps.slice(0, 3) ?? [] as step (step)}<li>{step}</li>{/each}
+      </ol>
     {:else}
       <ul class="tiles figures">
         {#each figures as figure, i (i)}
@@ -81,6 +112,53 @@ $effect(() => {
   }
   .figures li {
     height: 6rem;
+  }
+  .cards {
+    grid-template-columns: repeat(4, minmax(0, 7rem));
+  }
+  .back {
+    display: block;
+    height: 5.5rem;
+    border-radius: calc(var(--radius) - 0.25rem);
+    background: repeating-linear-gradient(45deg, var(--selected) 0 0.6rem, var(--surface) 0.6rem 1.2rem);
+  }
+  .squares {
+    grid-template-columns: repeat(3, 4.5rem);
+  }
+  .squares li {
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .number {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+  .trail {
+    width: 100%;
+    max-width: 22rem;
+  }
+  .trail polyline {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 5;
+  }
+  .trail circle {
+    fill: var(--selected);
+    stroke: var(--primary);
+    stroke-width: 4;
+  }
+  .trail text {
+    font-size: 26px;
+    font-weight: 700;
+    text-anchor: middle;
+    fill: var(--text);
+  }
+  .steps {
+    font-size: 1.15rem;
+    padding-left: 2rem;
+    margin: 0;
   }
   .marked {
     outline: 5px solid var(--right);

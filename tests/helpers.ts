@@ -49,7 +49,7 @@ export function makeApp(setup: Setup = {}) {
     content,
     store,
     rng: seeded(setup.seed ?? 7),
-    now: () => setup.now ?? new Date(2026, 10, 13, 10),
+    now: () => setup.now ?? new Date(2026, 10, 15, 10), // Shopping, Odd One Out and Trail
     voice: (state) =>
       new Voice(content.locale, player, () => state.profile?.settings.voice ?? true),
   });

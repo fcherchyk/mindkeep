@@ -1,0 +1,100 @@
+{
+  "tasks": [
+    {
+      "id": "tea",
+      "title": "Make a cup of tea",
+      "steps": [
+        "Fill the kettle with water",
+        "Switch the kettle on",
+        "Put a tea bag in the cup",
+        "Pour the boiling water into the cup",
+        "Take the tea bag out",
+        "Add a little milk"
+      ]
+    },
+    {
+      "id": "letter",
+      "title": "Post a letter",
+      "steps": [
+        "Write the letter",
+        "Fold it and put it in the envelope",
+        "Seal the envelope",
+        "Write the address on the front",
+        "Stick a stamp in the corner",
+        "Drop it in the post box"
+      ]
+    },
+    {
+      "id": "toast",
+      "title": "Make toast",
+      "steps": [
+        "Take two slices of bread from the bag",
+        "Put the bread in the toaster",
+        "Press the lever down",
+        "Wait for the toast to pop up",
+        "Put the toast on a plate",
+        "Spread butter on the toast"
+      ]
+    },
+    {
+      "id": "seed",
+      "title": "Plant a seed",
+      "steps": [
+        "Fill a pot with soil",
+        "Make a small hole in the soil",
+        "Drop the seed into the hole",
+        "Cover the seed with soil",
+        "Water the soil gently",
+        "Put the pot by a sunny window"
+      ]
+    },
+    {
+      "id": "hands",
+      "title": "Wash your hands",
+      "steps": [
+        "Turn on the tap",
+        "Wet your hands",
+        "Rub soap between your hands",
+        "Rinse the soap off",
+        "Turn off the tap",
+        "Dry your hands on a towel"
+      ]
+    },
+    {
+      "id": "bus",
+      "title": "Take the bus",
+      "steps": [
+        "Walk to the bus stop",
+        "Check which bus you need",
+        "Wave when your bus comes",
+        "Show your ticket to the driver",
+        "Sit down and ring the bell before your stop",
+        "Get off at your stop"
+      ]
+    },
+    {
+      "id": "call",
+      "title": "Make a phone call",
+      "steps": [
+        "Find the number in your address book",
+        "Pick up the phone",
+        "Dial the number",
+        "Wait for the other person to answer",
+        "Have your chat",
+        "Say goodbye and hang up"
+      ]
+    },
+    {
+      "id": "laundry",
+      "title": "Do the laundry",
+      "steps": [
+        "Sort the clothes into lights and darks",
+        "Put one pile in the washing machine",
+        "Add the washing powder",
+        "Start the machine",
+        "Take the clothes out when it stops",
+        "Hang the clothes up to dry"
+      ]
+    }
+  ]
+}

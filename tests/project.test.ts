@@ -60,8 +60,13 @@ function documented(): Map<string, Set<string>> {
 }
 
 test("test_S1_AC14_every_slice_has_a_doc_with_its_acceptance_criteria", () => {
-  expect(files("docs", /^S\d+_.*\.md$/)).toEqual(["docs/S1_mvp.md"]);
-  expect([...documented().keys()]).toEqual(Array.from({ length: 17 }, (_, i) => `S1_AC${i + 1}`));
+  const docs = files("docs", /^S\d+_.*\.md$/);
+  expect(docs.map((doc) => doc.match(/S(\d+)_/)?.[1])).toEqual(docs.map((_, i) => String(i + 1)));
+  for (const [i, doc] of docs.entries()) {
+    const ids = [...read(doc).matchAll(/^### (S\d+_AC\d+):/gm)].map((m) => m[1]);
+    expect(ids.length, doc).toBeGreaterThan(0);
+    expect(ids, doc).toEqual(ids.map((_, n) => `S${i + 1}_AC${n + 1}`));
+  }
 });
 
 test("test_S1_AC14_every_criterion_has_tests_and_the_doc_lists_exactly_those_that_exist", () => {

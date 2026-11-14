@@ -27,8 +27,11 @@ test("test_S1_AC1_anything_but_a_first_name_is_refused", () => {
   expect(() => newProfile("123")).toThrow();
 });
 
+// The profile does not depend on which games a day plays: these use S1's two games every day.
+const twoGames = { ...content, games: content.games.slice(0, 2), perSession: 2 };
+
 function play(rightFor: (game: string, i: number) => boolean) {
-  let session = newSession(content);
+  let session = newSession(twoGames);
   session.plan.forEach((game, i) => {
     session = record(session, { game, level: 1, right: rightFor(game, i) });
   });

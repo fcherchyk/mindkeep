@@ -5,38 +5,9 @@ import { tick } from "svelte";
 import { newProfile } from "../src/core/profile";
 import { content } from "../src/ui/content";
 import { renderApp } from "./helpers";
+import { click, playOdd, playRound, playShopping } from "./play";
 
 const word = new Map(content.items.map((item) => [item.word, item.id]));
-
-async function click(name: string | RegExp) {
-  await fireEvent.click(screen.getByRole("button", { name }));
-}
-
-/** Play the Shopping List round on screen, right or wrong. */
-async function playShopping(right: boolean) {
-  const listed = within(screen.getByTestId("list"))
-    .getAllByRole("listitem")
-    .map((li) => li.textContent?.trim() ?? "");
-  await click("Ready");
-  await vi.runAllTimersAsync();
-  await tick();
-  const choices = within(screen.getByTestId("choices")).getAllByRole("button");
-  const wanted = right ? listed : listed.slice(1);
-  for (const choice of choices) {
-    if (wanted.some((w) => choice.textContent?.includes(w))) await fireEvent.click(choice);
-  }
-  await click("Done");
-  return listed;
-}
-
-/** Play the Odd One Out round on screen: the different figure, or another one. */
-async function playOdd(right: boolean) {
-  const cells = within(screen.getByTestId("grid")).getAllByRole("button");
-  const kinds = cells.map((cell) => cell.dataset.figure);
-  const odd = kinds.findIndex((k) => kinds.filter((other) => other === k).length === 1);
-  await fireEvent.click(cells[right ? odd : (odd + 1) % cells.length] as HTMLElement);
-  return { cells, odd };
-}
 
 beforeEach(() => {
   vi.useFakeTimers();
@@ -73,12 +44,7 @@ test("test_S1_AC3_the_home_shows_todays_session_and_marks_it_done", async () => 
   expect(screen.queryByText(/streak/i)).toBeNull();
 
   await click("Start");
-  for (let round = 0; round < 6; round++) {
-    if (screen.queryByRole("button", { name: "Start" })) await click("Start");
-    if (screen.queryByTestId("list")) await playShopping(true);
-    else await playOdd(true);
-    await click(/^(Next|See today's summary)$/);
-  }
+  for (let round = 0; round < 9; round++) await playRound(() => true);
   await click("Home");
   expect(screen.getByTestId("done-today")).toHaveTextContent("Done today");
   expect(screen.getByRole("button", { name: "Play again" })).toBeInTheDocument();
@@ -177,12 +143,7 @@ test("test_S1_AC9_the_summary_shows_today_against_the_users_last_time", async ()
   ];
   renderApp({ profile });
   await click("Start");
-  for (let round = 0; round < 6; round++) {
-    if (screen.queryByRole("button", { name: "Start" })) await click("Start");
-    if (screen.queryByTestId("list")) await playShopping(false);
-    else await playOdd(true);
-    await click(/^(Next|See today's summary)$/);
-  }
+  for (let round = 0; round < 9; round++) await playRound((game) => game !== "shopping");
   expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Today's summary");
   const shopping = screen.getByTestId("summary-shopping");
   expect(shopping).toHaveTextContent("0 of 3 right");
@@ -195,12 +156,7 @@ test("test_S1_AC9_the_summary_shows_today_against_the_users_last_time", async ()
 test("test_S1_AC9_a_first_session_is_called_a_good_start", async () => {
   renderApp();
   await click("Start");
-  for (let round = 0; round < 6; round++) {
-    if (screen.queryByRole("button", { name: "Start" })) await click("Start");
-    if (screen.queryByTestId("list")) await playShopping(true);
-    else await playOdd(true);
-    await click(/^(Next|See today's summary)$/);
-  }
+  for (let round = 0; round < 9; round++) await playRound(() => true);
   expect(screen.getByTestId("summary-odd")).toHaveTextContent("Level 2 · Your first time");
   expect(screen.getByTestId("summary-shopping")).toHaveTextContent("Level 2 · Your first time");
 });

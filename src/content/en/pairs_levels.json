@@ -1,0 +1,11 @@
+{
+  "levels": [
+    { "pairs": 3, "misses": 2 },
+    { "pairs": 4, "misses": 3 },
+    { "pairs": 5, "misses": 3 },
+    { "pairs": 6, "misses": 4 },
+    { "pairs": 6, "misses": 3 },
+    { "pairs": 8, "misses": 5 },
+    { "pairs": 8, "misses": 4 }
+  ]
+}

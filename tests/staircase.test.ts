@@ -23,7 +23,7 @@ test("test_S1_AC6_the_level_is_saved_per_game_and_the_next_session_starts_there"
   const { app, store } = makeApp({ profile: newProfile("Rosa") });
   app.startSession();
   app.go("play");
-  for (let i = 0; i < 6; i++) app.finishRound(true); // 3 rounds of each game, all right
+  for (let i = 0; i < 9; i++) app.finishRound(true); // 3 rounds of each of the day's games
 
   expect(app.profile?.levels.shopping?.level).toBe(2);
   expect(app.profile?.levels.odd?.level).toBe(2);

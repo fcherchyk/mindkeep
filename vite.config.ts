@@ -20,6 +20,8 @@ export default defineConfig({
     environment: "jsdom",
     include: ["tests/**/*.test.ts"],
     setupFiles: ["tests/setup.ts"],
+    // The module cache keeps old `import.meta.glob` results, so new clips would go unseen.
+    fsModuleCache: false,
     coverage: {
       provider: "v8",
       include: ["src/**/*.{ts,svelte}"],

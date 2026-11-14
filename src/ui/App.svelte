@@ -4,9 +4,13 @@
 import Home from "./screens/Home.svelte";
 import Intro from "./screens/Intro.svelte";
 import Odd from "./screens/Odd.svelte";
+import Pairs from "./screens/Pairs.svelte";
+import Sequences from "./screens/Sequences.svelte";
 import Settings from "./screens/Settings.svelte";
 import Shopping from "./screens/Shopping.svelte";
+import Steps from "./screens/Steps.svelte";
 import Summary from "./screens/Summary.svelte";
+import Trail from "./screens/Trail.svelte";
 import Welcome from "./screens/Welcome.svelte";
 import type { AppState } from "./state.svelte";
 
@@ -33,6 +37,14 @@ $effect(() => {
     {#key app.session?.results.length}
       {#if app.game === "shopping"}
         <Shopping {app} />
+      {:else if app.game === "pairs"}
+        <Pairs {app} />
+      {:else if app.game === "sequences"}
+        <Sequences {app} />
+      {:else if app.game === "trail"}
+        <Trail {app} />
+      {:else if app.game === "steps"}
+        <Steps {app} />
       {:else}
         <Odd {app} />
       {/if}

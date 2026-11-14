@@ -1,0 +1,11 @@
+{
+  "levels": [
+    { "steps": 3, "extra": false },
+    { "steps": 4, "extra": false },
+    { "steps": 4, "extra": true },
+    { "steps": 5, "extra": false },
+    { "steps": 5, "extra": true },
+    { "steps": 6, "extra": false },
+    { "steps": 6, "extra": true }
+  ]
+}

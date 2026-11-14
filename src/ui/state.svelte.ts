@@ -14,6 +14,8 @@ import {
 import type { Rng } from "../core/random";
 import {
   currentGame,
+  dayNumber,
+  gamesOfDay,
   isFirstOfGame,
   isOver,
   newSession,
@@ -62,6 +64,11 @@ export class AppState {
     return today(this.now());
   }
 
+  /** The games of today's session (they rotate from day to day). */
+  get todayGames(): GameId[] {
+    return gamesOfDay(this.content, dayNumber(this.date));
+  }
+
   get game(): GameId | undefined {
     return this.session ? currentGame(this.session) : undefined;
   }
@@ -102,7 +109,7 @@ export class AppState {
   }
 
   startSession(): void {
-    this.session = newSession(this.content);
+    this.session = newSession(this.content, dayNumber(this.date));
     this.go("intro");
   }
 

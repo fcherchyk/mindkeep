@@ -1,0 +1,11 @@
+{
+  "levels": [
+    { "count": 5, "letters": false, "misses": 2 },
+    { "count": 8, "letters": false, "misses": 2 },
+    { "count": 6, "letters": true, "misses": 2 },
+    { "count": 8, "letters": true, "misses": 2 },
+    { "count": 10, "letters": true, "misses": 2 },
+    { "count": 12, "letters": true, "misses": 2 },
+    { "count": 12, "letters": true, "misses": 1 }
+  ]
+}

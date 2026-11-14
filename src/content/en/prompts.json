@@ -4,10 +4,33 @@
       "id": "shopping_intro",
       "spoken": "Look at the shopping list. When you have it in mind, press Ready."
     },
-    { "id": "shopping_pick", "spoken": "Pick the things that were on the list, then press Done." },
+    {
+      "id": "shopping_pick",
+      "spoken": "Pick the things that were on the list, then press Done."
+    },
     {
       "id": "odd_intro",
       "spoken": "All the shapes are the same but one. Pick the one that is different."
+    },
+    {
+      "id": "pairs_intro",
+      "spoken": "Turn up two cards at a time, and find the pairs with the same picture."
+    },
+    {
+      "id": "sequences_intro",
+      "spoken": "Some tiles will light up, one after another. Press Watch, then tap them in the same order."
+    },
+    {
+      "id": "sequences_repeat",
+      "spoken": "Now tap the tiles in the same order."
+    },
+    {
+      "id": "trail_intro",
+      "spoken": "Tap the circles in order, one after another. Some levels take turns between numbers and letters: one, A, two, B."
+    },
+    {
+      "id": "steps_intro",
+      "spoken": "Tap the steps in the order you would do them. If a step does not belong, leave it out."
     }
   ]
 }

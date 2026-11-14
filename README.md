@@ -1,7 +1,8 @@
 # MindKeep
 
-Calm daily exercises for older adults who want to keep their memory and attention active. A few
-minutes a day, with no clock, no way to lose and no comparison with anyone but yourself.
+Calm daily exercises for older adults who want to keep their memory, attention and planning
+active. A few minutes a day, with no clock, no way to lose and no comparison with anyone but
+yourself.
 
 MindKeep is for exercise. It is not a medical device and does not diagnose, treat or prevent any
 condition. Cognitive training mostly improves the exercises practised; it is one healthy habit
@@ -10,13 +11,21 @@ among others (moving, sleeping well, seeing people).
 An installable web app (TypeScript, Svelte 5, Vite): it runs in the browser on desktop, tablet and
 phone, can be installed as an app, and works offline.
 
-## Features (slice 1)
+## Features
 
-- **Today's session:** about 10 minutes, memory and attention taking turns, three rounds each.
+- **Today's session:** about 10 minutes, one game of each area (memory, attention, planning)
+  taking turns, three rounds each. Each area's games come in turn from day to day.
 - **Shopping List (memory):** learn a shopping list (press Ready when you have it), wait a moment,
   then pick its items out of a larger set.
 - **Odd One Out (attention):** find the one figure that differs: by shape, size, turn or a small
   mark, never by colour alone.
+- **Pairs (memory):** turn up two cards at a time and find the pairs; a pair that does not match
+  turns back by itself. Only the misses count, and there is no clock.
+- **Sequences (memory):** press Watch, tiles light up one by one, then tap them in the same order.
+- **Trail (planning):** tap scattered circles in order, 1-2-3, and later 1-A-2-B-3-C. A wrong tap
+  only gets a hint.
+- **Put the Steps in Order (planning):** tap the steps of an everyday task (making tea, posting a
+  letter) in the order you would do them, leaving out a step that does not belong.
 - **Adaptive difficulty:** each game moves up after three right answers in a row and down after a
   wrong one, so it stays challenging without being discouraging. Tomorrow starts where today ended.
 - **Instructions written and spoken**, with "Listen" and "Show me".
@@ -74,8 +83,8 @@ Read [`docs/standards.md`](docs/standards.md) before changing anything.
 | Slice | Content                                              |
 | ----- | ---------------------------------------------------- |
 | S1 ✅ | Profile, today's session, Shopping List, Odd One Out |
-| S2    | Memory: Pairs and Sequences                          |
-| S3    | Planning: Trail (1‑A‑2‑B) and Put the Steps in Order |
+| S2 ✅ | Memory: Pairs and Sequences                          |
+| S3 ✅ | Planning: Trail (1‑A‑2‑B) and Put the Steps in Order |
 | S4    | Speed: Symbol Match and Quick Look                   |
 | S5    | Daily life: Change, Clocks and Calendar              |
 | S6    | Words: Categories, Anagrams and Sayings              |
