@@ -132,9 +132,10 @@ describe.skipIf(process.platform === "win32")("sandbox scripts", () => {
     for (const [version, ok] of [
       ["v20.19.0", false],
       ["v22.12.0", false],
-      ["v22.22.2", true],
-      ["v24.14.0", false],
-      ["v24.15.0", true],
+      ["v22.13.0", true],
+      ["v22.21.0", true],
+      ["v23.11.0", false],
+      ["v24.0.0", true],
       ["v26.1.0", true],
     ] as const) {
       const dir = project();
@@ -142,7 +143,7 @@ describe.skipIf(process.platform === "win32")("sandbox scripts", () => {
       chmodSync(join(dir, "bin", "node"), 0o755);
       const run = install({}, dir);
       expect(run.ok, version).toBe(ok);
-      if (!ok) expect(run.output).toMatch(/needs Node 22\.22\.2\+ or 24\.15\.0\+/);
+      if (!ok) expect(run.output).toMatch(/needs Node 22\.13\+ or 24\+/);
     }
   });
 });

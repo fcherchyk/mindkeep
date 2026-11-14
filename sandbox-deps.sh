@@ -48,19 +48,18 @@ _deps_try() {
   return 1
 }
 
-# The Node versions the dependencies accept: ^22.22.2 or >=24.15.0 (as "engines" in package.json).
+# The Node versions the dependencies accept: ^22.13.0 or >=24.0.0 (as "engines" in package.json).
 _deps_check_node() {
-  local version major minor patch
+  local version major minor
   if ! version="$(node --version 2>/dev/null)"; then
-    _deps_note "Node.js is not installed; MindKeep needs Node 22.22.2+ or 24.15.0+."
+    _deps_note "Node.js is not installed; MindKeep needs Node 22.13+ or 24+."
     return 1
   fi
-  IFS=. read -r major minor patch <<<"${version#v}"
-  if [ "$major" -ge 25 ] || { [ "$major" -eq 24 ] && [ "$minor" -ge 15 ]; } ||
-    { [ "$major" -eq 22 ] && { [ "$minor" -gt 22 ] || { [ "$minor" -eq 22 ] && [ "$patch" -ge 2 ]; }; }; }; then
+  IFS=. read -r major minor _ <<<"${version#v}"
+  if [ "$major" -ge 24 ] || { [ "$major" -eq 22 ] && [ "$minor" -ge 13 ]; }; then
     return 0
   fi
-  _deps_note "Node $version is too old; MindKeep needs Node 22.22.2+ or 24.15.0+."
+  _deps_note "Node $version is too old; MindKeep needs Node 22.13+ or 24+."
   return 1
 }
 

@@ -38,7 +38,7 @@ phone, can be installed as an app, and works offline.
 
 ## Run it
 
-Needs Node 24+ and pnpm.
+Needs Node 22.13+ or 24+, and pnpm.
 
 ```bash
 pnpm install

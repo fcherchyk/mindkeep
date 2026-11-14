@@ -21,7 +21,7 @@
     "@testing-library/svelte": "^5.2.0",
     "@types/node": "^26.0.0",
     "@vitest/coverage-v8": "^5.0.0",
-    "jsdom": "^30.0.0",
+    "jsdom": "^29.1.1",
     "svelte": "^5.40.0",
     "svelte-check": "^4.0.0",
     "typescript": "^6.0.2",
@@ -32,6 +32,6 @@
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {
-    "node": "^22.22.2 || >=24.15.0"
+    "node": "^22.13.0 || >=24.0.0"
   }
 }
